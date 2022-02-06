@@ -48,19 +48,15 @@ def StrToInt(list):
             continue
     return sequence
 
-#Function for intersection of two sequences
-def SequenceIntersection(list1, list2):
-    s1 = list(set(StrToInt(list1)))
-    s2 = list(set(StrToInt(list2)))
-    s3 = []
-    for element in s1:
-        if element in s2:
-            s3.append(element)
-            WriteToFile("output.txt", f"{element} ")
-    return s3
-
-#Loading sequences from input files and calling function for their intersection
+#Loading sequences from files, converting to integers and deleting duplicate elements
 sequence_1 = SequenceFromFile("input1.txt")
 sequence_2 = SequenceFromFile("input2.txt")
+s1 = list(set(StrToInt(sequence_1)))
+s2 = list(set(StrToInt(sequence_2)))
 
-s_intersection = SequenceIntersection(sequence_1, sequence_2)
+#Loop for intersection of sequences
+s_intersection = []
+for element in s1:
+    if element in s2:
+        s_intersection.append(element)
+        WriteToFile("output.txt", f"{element} ")
