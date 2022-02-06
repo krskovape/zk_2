@@ -10,7 +10,7 @@ def SequenceFromFile(file_name):
             data = f.read().split()
             return data
     except FileNotFoundError:
-        print(f"Cannot open file {file_name}. The file does not exist or the path to the file is incorect")
+        print(f"Cannot open file {file_name}. The file does not exist or the path to the file is incorrect")
         quit()
     except PermissionError:
         print(f"Program doesn't have permisson to acces file {file_name}.")
@@ -25,7 +25,7 @@ def WriteToFile(file_name, text):
         with open(file_name, mode="a", encoding="utf-8") as f:
             return f.write(str(text))
     except FileNotFoundError:
-        print(f"Cannot open file {file_name}. The file does not exist or the path to the file is incorect")
+        print(f"Cannot open file {file_name}. The file does not exist or the path to the file is incorrect")
         quit()
     except PermissionError:
         print(f"Program doesn't have permisson to acces file {file_name}.")
@@ -34,25 +34,24 @@ def WriteToFile(file_name, text):
         print(f"Unexpected error opening {file_name}: {e}")
         quit()
 
-#Function for deleting duplicate elements and converting string elements into integers
-def StrToSetInt(sqnc):
-    set_list = list(set(sqnc))
+#Function for converting string elements into integers
+def StrToInt(list):
     sequence = []
     index = -1
-    for x in set_list:
+    for x in list:
         index += 1
         try:
             y = int(x)
             sequence.append(y)
         except ValueError:
-            print(f"Element in position {index} in {sqnc} is not a number and the program will skip this element")
+            print(f"Element in position {index} in {list} is not a number and the program will skip this element")
             continue
     return sequence
 
 #Function for intersection of two sequences
 def SequenceIntersection(list1, list2):
-    s1 = StrToSetInt(list1)
-    s2 = StrToSetInt(list2)
+    s1 = list(set(StrToInt(list1)))
+    s2 = list(set(StrToInt(list2)))
     s3 = []
     for element in s1:
         if element in s2:
