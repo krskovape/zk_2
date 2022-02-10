@@ -58,29 +58,33 @@ def SortList(input_list):
         input_list[i], input_list[min] = input_list[min], input_list[i]
     return input_list
 
+#Function for intersection of two lists
+def IntersectionOfLists(l1, l2):
+    m = len(l1)
+    n = len(l2)
+    i, j = 0, 0
+    intersection = []
+    last = None
+
+    while i < m and j < n:
+        if l1[i] < l2[j]:
+            i += 1
+        elif l2[j] < l1[i]:
+            j += 1
+        elif l1[i] == l2[j]:
+            if l1[i] != last:
+                intersection.append(l1[i])
+                WriteToFile("output.txt", f"{l1[i]} ")
+                last = l1[i]
+            i += 1
+            j += 1
+    return intersection
+
 #Loading sequences from files, converting to integers and deleting duplicate elements
 sequence_1 = SequenceFromFile("input1.txt")
 sequence_2 = SequenceFromFile("input2.txt")
 l1 = SortList(StrToInt(sequence_1))
 l2 = SortList(StrToInt(sequence_2))
 
-#Initialisation of variables
-m = len(l1)
-n = len(l2)
-i, j = 0, 0
-intersetion = []
-last = None
-
-#Loop for intersection of sequences
-while i < m and j < n:
-    if l1[i] < l2[j]:
-        i += 1
-    elif l2[j] < l1[i]:
-        j += 1
-    elif l1[i] == l2[j]:
-        if l1[i] != last:
-            intersetion.append(l1[i])
-            WriteToFile("output.txt", f"{l1[i]} ")
-            last = l1[i]
-        i += 1
-        j += 1
+#Intersection
+intersection = IntersectionOfLists(l1, l2)
